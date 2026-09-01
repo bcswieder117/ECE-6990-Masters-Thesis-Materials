@@ -2,15 +2,15 @@
 
 ## Theory, Algorithm Development, and MATLAB Validation
 
-> **Project Status:** Active Master of Science thesis project at Tennessee Technological University. This repository contains the reproducible MATLAB implementations, numerical studies, literature documentation, and supporting materials developed for the thesis. The final defended thesis, archival citation, and approved publication links will be added following institutional submission and approval.
+> **Project Status:** Completed Master of Science project report in Electrical and Computer Engineering at Tennessee Technological University, August 2026. This repository contains the reproducible MATLAB implementations, numerical studies, literature documentation, and supporting materials developed for the report. The report evaluates four disturbance-aware zero-sum control methods in a common MATLAB framework; nonlinear vehicle, QLabs, and physical QCar validation remain future work.
 
 ## Overview
 
 This repository documents a theoretical and computational research project involving zero-sum dynamic games, model-based control, model-free control, persistent command disturbances, and pursuit-evasion systems.
 
-The thesis investigates how established model-based and model-free zero-sum control algorithms can be extended to account for persistent differences between commanded and realized control inputs.
+The project report investigates how established model-based and model-free zero-sum control algorithms can be extended to account for persistent differences between commanded and realized control inputs.
 
-The work does not replace the original algorithms or claim that policy iteration, value iteration, or Q-learning were developed in this thesis. Instead, the original solution structures are retained and expanded with:
+The work does not replace the original algorithms or claim that policy iteration, value iteration, or Q-learning were developed in this project. Instead, the original solution structures are retained and expanded with:
 
 - persistent command-channel offsets;
 - command-offset estimation;
@@ -21,11 +21,11 @@ The work does not replace the original algorithms or claim that policy iteration
 
 The model-based methods use known system matrices and generalized algebraic Riccati equation methods. The model-free methods recover the corresponding zero-sum policies from sampled state, action, cost, and successor-state data without directly using the analytical state-transition matrices in the learning update.
 
-The current work provides a theoretical and MATLAB-based foundation for later nonlinear autonomous-ground-vehicle and QCar studies. Completed physical QCar validation is not claimed.
+The completed report provides a theoretical and MATLAB-based foundation for later nonlinear autonomous-ground-vehicle and QCar studies. Completed physical QCar validation is not claimed.
 
-## Research Direction
+## Report Structure
 
-The thesis is organized around four established zero-sum control methods:
+The project report is organized around four established zero-sum control methods:
 
 1. Model-based policy iteration.
 2. Model-based value iteration.
@@ -34,7 +34,7 @@ The thesis is organized around four established zero-sum control methods:
 
 Each method is extended using the same disturbance model, compensation structure, and evaluation criteria.
 
-The objective is to produce matched disturbance-aware implementations of the four algorithms while preserving the mathematical role of each original method.
+The objective was to produce matched disturbance-aware implementations of the four algorithms while preserving the mathematical role of each original method.
 
 ## Zero-Sum Game Formulation
 
@@ -335,7 +335,7 @@ This is a verification case used to confirm that exact cancellation recovers the
 
 MATLAB is used to examine the theoretical and computational behavior of the extended algorithms.
 
-The numerical studies include or may include:
+The completed numerical studies include:
 
 - policy-iteration convergence;
 - value-iteration convergence;
@@ -366,23 +366,20 @@ The MATLAB scripts save reproducible outputs such as:
 - numerical summary `.csv` files;
 - complete workspace `.mat` files.
 
-## Current Model-Based Policy-Iteration Study
+## Completed Four-Method Study
 
-The completed model-based policy-iteration benchmark evaluates:
+The completed MS project report evaluates all four algorithms under the same plant, game weights, initial state, command offsets, and numerical criteria. The nominal controllers agree to their respective stopping tolerances and share the same closed-loop spectral radius and saddle-point curvature values.
 
-- convergence of the value matrix;
-- convergence of the pursuer gain;
-- convergence of the evader gain;
-- the final generalized Riccati residual;
-- closed-loop Schur stability;
-- minimizing-player curvature;
-- maximizing-player curvature;
-- persistent command-offset estimation;
-- uncompensated steady-state behavior;
-- estimated-compensation behavior;
-- exact-compensation verification.
+| Method | Outer steps | Defining residual | Closed-loop spectral radius |
+| --- | ---: | ---: | ---: |
+| Model-based GARE policy iteration | 4 | `6.40e-15` GARE | `0.9819707273` |
+| Model-based GARE value iteration | 633 | `9.44e-11` GARE | `0.9819707273` |
+| Model-free Q-learning policy iteration | 5 | `4.02e-15` Bellman | `0.9819707273` |
+| Model-free Q-learning value iteration | 633 | `3.38e-12` Bellman | `0.9819707273` |
 
-The study compares:
+Across all four methods, the uncompensated maximum Q-weighted state deviation is approximately `4.1286e-2`. Known-model transition-residual estimation reduces the maximum deviation to approximately `1.1350e-4` (about 99.725%), while direct command-mismatch estimation reduces it to approximately `4.1668e-6` (about 99.990%). Exact compensation reproduces the nominal trajectory to numerical precision.
+
+The completed study compares:
 
 ```text
 Nominal operation
@@ -391,7 +388,7 @@ Persistent offsets with estimated compensation
 Persistent offsets with exact compensation
 ```
 
-The same criteria will be used when the remaining model-based and model-free files are updated.
+The analytical affine-deviation recurrence agrees with the independently simulated deviations to approximately `1e-15`, confirming that the remaining trajectory error is governed by the residual offset-estimation error rather than by a change in the nominal policy.
 
 ## Relationship to Pursuit-Evasion Control
 
@@ -410,7 +407,7 @@ The pursuit-evasion interpretation is:
 
 ## Relationship to Autonomous Ground Vehicles
 
-The broader thesis uses autonomous ground-vehicle pursuit-evasion as the motivating application.
+The project report uses autonomous ground-vehicle pursuit-evasion as the motivating application.
 
 A representative vehicle state is:
 
@@ -450,7 +447,7 @@ bE = [
 ]
 ```
 
-The current linear zero-sum studies therefore provide the algorithmic and numerical foundation for later nonlinear vehicle extensions.
+The completed linear zero-sum studies therefore provide the algorithmic and numerical foundation for later nonlinear vehicle extensions.
 
 ## Research Focus
 
@@ -471,17 +468,17 @@ This work was presented at Tennessee Tech's **2026 Research and Creative Inquiry
 
 [View the Tennessee Tech Research and Creative Inquiry Symposium page](https://www.tntech.edu/research/research-day.php)
 
-The symposium presentation reflects an earlier stage of the thesis. The current direction places greater emphasis on disturbance-aware extensions of established model-based and model-free zero-sum algorithms and MATLAB-based theoretical validation.
+The symposium presentation reflects an earlier stage of the MS project. The final August 2026 report places greater emphasis on disturbance-aware extensions of established model-based and model-free zero-sum algorithms and matched MATLAB validation.
 
 ## Abstract
 
-This thesis develops a disturbance-aware framework for discrete-time zero-sum pursuit-evasion control using established model-based and model-free solution methods. The work is theoretical and computational in scope. Rather than introducing a new family of control algorithms, it extends existing policy-iteration, value-iteration, and Q-learning formulations so that persistent command-channel offsets can be represented, estimated, and compensated within a pursuit-evasion setting.
+This project report investigates disturbance-aware control for a discrete-time, two-player, zero-sum pursuit-evasion game and develops a common framework for extending established model-based and model-free solution methods without replacing their original policy iteration, value iteration, or Q-learning structures. The pursuer is represented as the minimizing player, while the evader is represented as the maximizing player within a linear-quadratic dynamic game. The nominal saddle-point policies are characterized through a generalized algebraic Riccati equation and an equivalent quadratic action-value representation.
 
-The pursuit-evasion problem is formulated as a two-player zero-sum dynamic game in which the pursuer minimizes a quadratic performance index while the evader maximizes the same objective. The model-based portion extends generalized algebraic Riccati policy iteration and value iteration by incorporating pursuer and evader command offsets, model-based bias estimation, and affine compensation. The original Riccati and policy-update structures are retained, while the compensation layer accounts for differences between commanded and realized inputs.
+Four established methods are considered: model-based generalized Riccati policy and value iteration, as well as model-free quadratic Q-learning policy and value iteration. Each method is extended to include persistent command-channel offsets affecting both the pursuer and evader. Offset estimates are obtained from transition residuals or measured command mismatch, depending on the information structure of the algorithm. Affine compensation is then applied by subtracting the estimated offsets from the commanded control actions.
 
-The model-free portion applies corresponding quadratic Q-learning policy-iteration and value-iteration methods to the same disturbance-aware game. These methods estimate the action-value function and recover the pursuer and evader feedback policies from sampled states, inputs, costs, and successor states without requiring direct access to the analytical transition matrices in the learning update.
+The resulting residual-bias dynamics directly relate the compensated closed-loop response to the remaining estimation error and establish exact compensation as a verification case. The model-free methods use realized inputs in the sampled transition tuples so that the Bellman regression remains physically consistent with the transition and stage cost produced by those inputs.
 
-MATLAB studies are used to examine convergence, saddle-point validity, command-offset estimation, closed-loop stability, finite-window game cost, and deviation from nominal behavior. The numerical cases compare nominal operation, persistent offsets without compensation, persistent offsets with estimated compensation, and exact compensation as a verification case. The thesis therefore establishes a theoretical and computational foundation for later nonlinear vehicle studies, QLabs implementation, and physical QCar validation.
+MATLAB studies evaluate nominal operation, uncompensated command offsets, estimated-offset compensation, and exact compensation under matched system matrices, game weights, disturbances, initial conditions, and numerical criteria. Validation includes policy and value convergence, generalized Riccati and Bellman residuals, closed-loop spectral radius, saddle-point curvature, matrix conditioning, feature-rank requirements, bias-estimation error, state and input trajectories, and cumulative game cost. The contribution is the unified disturbance-aware extension and matched evaluation of four established zero-sum control methods within a common pursuit-evasion framework. Nonlinear autonomous-ground-vehicle, QLabs, and physical QCar implementations remain future work.
 
 ## Scope
 
@@ -498,13 +495,14 @@ The current scope includes:
 - command-offset estimation;
 - affine command compensation;
 - MATLAB convergence and closed-loop studies;
-- preparation for later autonomous-ground-vehicle implementation.
+- matched numerical evaluation of all four algorithms;
+- a foundation for later autonomous-ground-vehicle implementation.
 
 The current scope does not include:
 
 - completed physical QCar experiments;
 - completed QLabs deployment;
-- a claim that the underlying algorithms were invented in this thesis;
+- a claim that the underlying algorithms were invented in this project;
 - deep actor-critic reinforcement-learning methods;
 - a full autonomous-driving traffic simulator;
 - multi-pursuer or multi-evader coordination;
@@ -513,7 +511,7 @@ The current scope does not include:
 
 ## Research Contribution
 
-The contribution of this thesis is not the invention of policy iteration, value iteration, or Q-learning.
+The contribution of this project report is not the invention of policy iteration, value iteration, or Q-learning.
 
 The contribution is the systematic extension and evaluation of established model-based and model-free zero-sum algorithms for a disturbance-aware pursuit-evasion problem.
 
@@ -525,7 +523,8 @@ The primary contributions are:
 4. An extension of model-free Q-learning policy iteration for the same zero-sum game.
 5. An extension of model-free Q-learning value iteration under matched disturbance assumptions.
 6. A reproducible MATLAB framework for nominal, uncompensated, estimated-compensation, and exact-compensation studies.
-7. A theoretical and computational foundation for later nonlinear vehicle and QCar implementation.
+7. Matched numerical evidence that all four methods recover the same nominal saddle solution under their respective information structures.
+8. A theoretical and computational foundation for later nonlinear vehicle and QCar implementation.
 
 ## Future Work
 
@@ -550,6 +549,4 @@ Future work may include:
 
 ## Citation
 
-Citation information for the final thesis will be added after the thesis has been submitted, defended, approved, and archived.
-
-A complete archival citation and permanent institutional link will be added when available.
+Swieder, Blaine Christopher. *Disturbance-Aware Model-Based and Model-Free Zero-Sum Pursuit-Evasion Control: Theory, Algorithm Development, and MATLAB Validation.* MS project report, Tennessee Technological University, August 2026.
